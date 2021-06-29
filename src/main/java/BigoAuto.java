@@ -35,15 +35,15 @@ public class BigoAuto {
         driver = new AndroidDriver<>(new URL("http://127.0.0.1:4723/wd/hub"), caps);
         wait = new WebDriverWait(driver, 30);
 
-//        driver.removeApp("sg.bigo.live");
-//
-//        URL res = getClass().getClassLoader().getResource(GetConfig.bigoApkVersion);
-//        assert res != null;
-//        File file = Paths.get(res.toURI()).toFile();
-//        String absolutePathApk = file.getAbsolutePath();
-//
-//        driver.installApp(absolutePathApk);
-//        driver.startActivity(new Activity("sg.bigo.live", "sg.bigo.live.home.MainActivity"));
+        driver.removeApp("sg.bigo.live");
+
+        URL res = getClass().getClassLoader().getResource(GetConfig.bigoApkVersion);
+        assert res != null;
+        File file = Paths.get(res.toURI()).toFile();
+        String absolutePathApk = file.getAbsolutePath();
+
+        driver.installApp(absolutePathApk);
+        driver.startActivity(new Activity("sg.bigo.live", "sg.bigo.live.home.MainActivity"));
 
 
     }

@@ -7,7 +7,7 @@ import java.util.concurrent.TimeUnit;
 
 public class App {
     public static void main(String[] args) throws IOException, URISyntaxException, InterruptedException {
-        for (int j = 0; j < 50; j++) {
+        for (int j = 0; j < 1; j++) {
             BigoAuto bigo = new BigoAuto();
             bigo.signup();
             ApiSmsActivate apiSmsActivate = new ApiSmsActivate("bl", GetConfig.apiSmsActivate);
