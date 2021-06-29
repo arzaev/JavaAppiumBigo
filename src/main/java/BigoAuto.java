@@ -35,15 +35,15 @@ public class BigoAuto {
         driver = new AndroidDriver<>(new URL("http://127.0.0.1:4723/wd/hub"), caps);
         wait = new WebDriverWait(driver, 30);
 
-        driver.removeApp("sg.bigo.live");
-
-        URL res = getClass().getClassLoader().getResource(GetConfig.bigoApkVersion);
-        assert res != null;
-        File file = Paths.get(res.toURI()).toFile();
-        String absolutePathApk = file.getAbsolutePath();
-
-        driver.installApp(absolutePathApk);
-        driver.startActivity(new Activity("sg.bigo.live", "sg.bigo.live.home.MainActivity"));
+//        driver.removeApp("sg.bigo.live");
+//
+//        URL res = getClass().getClassLoader().getResource(GetConfig.bigoApkVersion);
+//        assert res != null;
+//        File file = Paths.get(res.toURI()).toFile();
+//        String absolutePathApk = file.getAbsolutePath();
+//
+//        driver.installApp(absolutePathApk);
+//        driver.startActivity(new Activity("sg.bigo.live", "sg.bigo.live.home.MainActivity"));
 
 
     }
@@ -126,6 +126,26 @@ public class BigoAuto {
         wait.until(ExpectedConditions.visibilityOfElementLocated((confirmBirth))).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated((next))).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated((tvClose))).click();
+    }
+
+    public void SearchUser(String user) {
+        By home = By.id("sg.bigo.live:id/home_theme_live_h");
+        By search = By.id("sg.bigo.live:id/iv_search");
+        By inp = By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/" +
+                "android.widget.FrameLayout/android.widget.LinearLayout/" +
+                "android.widget.FrameLayout/android.widget.RelativeLayout/" +
+                "android.widget.LinearLayout/android.widget.LinearLayout/android.widget.EditText");
+        By searchUsername = By.id("sg.bigo.live:id/tv_search");
+        By clickUser = By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[1]/android.widget.LinearLayout/android.widget.LinearLayout[1]/android.widget.LinearLayout/android.widget.TextView");
+        By fans = By.id("sg.bigo.live:id/fans_fans_title");
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated((home))).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated((search))).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated((inp))).sendKeys(user);
+        wait.until(ExpectedConditions.visibilityOfElementLocated((searchUsername))).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated((clickUser))).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated((fans))).click();
+
     }
 
 //    public void followUsers(int idUser) {
