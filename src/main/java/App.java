@@ -40,7 +40,7 @@ public class App {
                 // here we have to add follow methods
 
 
-                bigo.SearchUser(GetConfig.usernames[0]);
+                bigo.SearchUser(GetConfig.usernames[3]);
 
                 int count = 0;
                 for (int i = 0; i < 120; i++) {

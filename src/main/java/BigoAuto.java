@@ -225,4 +225,25 @@ public class BigoAuto {
         }
 
     }
+
+    public void RandomMessage() {
+        for (int i = 0; i < 100; i++){
+            By chat = By.id("sg.bigo.live:id/iv_online_background");
+            wait.until(ExpectedConditions.visibilityOfElementLocated((chat))).click();
+            By userChat = By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/" +
+                    "android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/" +
+                    "android.widget.LinearLayout/android.widget.FrameLayout/" +
+                    "androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[2]/" +
+                    "android.widget.FrameLayout[3]/android.widget.TextView");
+            wait.until(ExpectedConditions.visibilityOfElementLocated((userChat))).click();
+            By input = By.id("sg.bigo.live:id/timeline_input");
+            wait.until(ExpectedConditions.visibilityOfElementLocated((input))).sendKeys("hi");
+            By sendMessage = By.id("sg.bigo.live:id/timeline_txt_send_btn");
+            wait.until(ExpectedConditions.visibilityOfElementLocated((sendMessage))).click();
+            By back = By.xpath("//android.widget.ImageButton[@content-desc=\"Navigate up\"]");
+            wait.until(ExpectedConditions.visibilityOfElementLocated((back))).click();
+            wait.until(ExpectedConditions.visibilityOfElementLocated((back))).click();
+        }
+
+    }
 }
