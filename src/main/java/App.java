@@ -9,7 +9,7 @@ public class App {
     public static void main(String[] args) throws IOException, URISyntaxException, InterruptedException {
         for (int j = 0; j < 1; j++) {
             BigoAuto bigo = new BigoAuto();
-            bigo.signup();
+            bigo.setCountry();
             ApiSmsActivate apiSmsActivate = new ApiSmsActivate("bl", GetConfig.apiSmsActivate);
             String answer = apiSmsActivate.GetNumber();
             String[] elements = answer.split(":");

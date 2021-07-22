@@ -48,7 +48,8 @@ public class BigoAuto {
 
     }
 
-    public void signup() {
+
+    public void setCountry() {
         By AllowLocationBtn = By.id("sg.bigo.live:id/location_permission_guide_btn");
         By WhileUsingTheApp = By.id("com.android.permissioncontroller:id/permission_allow_foreground_only_button");
         By CountriesBtn = By.id("sg.bigo.live:id/ll_area_code");
@@ -69,6 +70,14 @@ public class BigoAuto {
 
         wait.until(ExpectedConditions.visibilityOfElementLocated((inputPhoneNumber))).sendKeys(phoneNumber);
         wait.until(ExpectedConditions.visibilityOfElementLocated((next))).click();
+    }
+
+    public void typePassword(String password) {
+        By passwordField = By.id("sg.bigo.live:id/et_password");
+        By nextBtn = By.id("sg.bigo.live:id/tv_next");
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated((passwordField))).sendKeys(password);
+        wait.until(ExpectedConditions.visibilityOfElementLocated((nextBtn))).click();
     }
 
     public void typeCode(String code) {
