@@ -1,6 +1,8 @@
 GetConfig.java
 accounts.txt
 tmp.txt
+MyLogFile.log.lck
+MyLogFile.log
 src/main/resources/
 
 

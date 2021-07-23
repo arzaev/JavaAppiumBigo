@@ -49,7 +49,6 @@ public class App {
                     System.out.println(count);
                 }
 
-
                 System.out.println("done");
             } else {
                 System.out.println("didn't get phone number");

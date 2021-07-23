@@ -1,3 +1,4 @@
+import io.appium.java_client.MobileElement;
 import io.appium.java_client.PerformsTouchActions;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.Activity;
@@ -78,6 +79,32 @@ public class BigoAuto {
 
         wait.until(ExpectedConditions.visibilityOfElementLocated((passwordField))).sendKeys(password);
         wait.until(ExpectedConditions.visibilityOfElementLocated((nextBtn))).click();
+    }
+
+    public void goHome() {
+        try {
+            By homeBtn = By.id("sg.bigo.live:id/home_theme_personal");
+            wait.until(ExpectedConditions.visibilityOfElementLocated((homeBtn))).click();
+        } catch (Exception e) {
+            By tmp1 = By.id("sg.bigo.live:id/bt_notification_share");
+            By tmp2 = By.id("Navigate up");
+            By tmp3 = By.id("android:id/button1");
+
+            wait.until(ExpectedConditions.visibilityOfElementLocated((tmp1))).click();
+            wait.until(ExpectedConditions.visibilityOfElementLocated((tmp2))).click();
+            wait.until(ExpectedConditions.visibilityOfElementLocated((tmp3))).click();
+
+            By homeBtn = By.id("sg.bigo.live:id/home_theme_personal");
+            wait.until(ExpectedConditions.visibilityOfElementLocated((homeBtn))).click();
+        }
+
+
+    }
+
+    public void goFans() {
+        By fansBtn = By.id("sg.bigo.live:id/tv_fans_num");
+        wait.until(ExpectedConditions.visibilityOfElementLocated((fansBtn))).click();
+
     }
 
     public void typeCode(String code) {
@@ -216,12 +243,13 @@ public class BigoAuto {
                 }
             }
         }
-        ScrollDown();
+        int times = 2;
+        ScrollDown(times);
         return countFollow;
     }
 
-    private void ScrollDown() {
-        for (int i = 0; i < 2; i++) {
+    private void ScrollDown(int times) {
+        for (int i = 0; i < times; i++) {
             Dimension size = driver.manage().window().getSize();
             int width = (int)(size.width/2);
             int startPoint = (int) (size.getHeight() * 0.80);
@@ -233,6 +261,57 @@ public class BigoAuto {
                     .release().perform();
         }
 
+    }
+
+    public ArrayList<String> sendMessages(String message, ArrayList<String> arrListUsernames) {
+        for (int i = 1; i <= 8; i++) {
+            String numberUser = Integer.toString(i);
+            try {
+                By userFollow = By.xpath("/hierarchy/android.widget.FrameLayout/" +
+                        "android.widget.LinearLayout/android.widget.FrameLayout/" +
+                        "android.widget.LinearLayout/android.widget.FrameLayout/" +
+                        "android.widget.LinearLayout/androidx.viewpager.widget.ViewPager/" +
+                        "android.widget.FrameLayout/android.widget.LinearLayout/" +
+                        "android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/" +
+                        "android.widget.LinearLayout[" + numberUser + "]/android.widget.LinearLayout/" +
+                        "android.widget.LinearLayout[1]/android.widget.ImageView");
+
+                MobileElement element = (MobileElement) driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/" +
+                        "android.widget.LinearLayout/android.widget.FrameLayout/" +
+                        "android.widget.LinearLayout/android.widget.FrameLayout/" +
+                        "android.widget.LinearLayout/androidx.viewpager.widget.ViewPager/" +
+                        "android.widget.FrameLayout/android.widget.LinearLayout/" +
+                        "android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/" +
+                        "android.widget.LinearLayout[" + numberUser + "]/android.widget.LinearLayout/" +
+                        "android.widget.LinearLayout[2]/android.widget.LinearLayout/" +
+                        "android.widget.TextView");
+
+                String nameUser = element.getText();
+
+                if(arrListUsernames.contains(nameUser)) {
+                    System.out.println("we have");
+                }
+                else {
+                    driver.findElement(userFollow).click();
+                    By chatBtn = By.id("sg.bigo.live:id/tv_chat");
+                    wait.until(ExpectedConditions.visibilityOfElementLocated((chatBtn))).click();
+                    By messageField = By.id("sg.bigo.live:id/timeline_input");
+                    wait.until(ExpectedConditions.visibilityOfElementLocated((messageField))).sendKeys(message);
+                    By sendMsgBtn = By.id("sg.bigo.live:id/timeline_txt_send_btn");
+                    wait.until(ExpectedConditions.visibilityOfElementLocated((sendMsgBtn))).click();
+                    By backBtn = By.xpath("//android.widget.ImageButton[@content-desc=\"Navigate up\"]");
+                    wait.until(ExpectedConditions.visibilityOfElementLocated((backBtn))).click();
+                    driver.navigate().back();
+                    arrListUsernames.add(nameUser);
+                }
+
+            } catch (Exception e) {
+                    System.out.println(e.toString());
+            }
+        }
+        int times = 1;
+        ScrollDown(times);
+        return arrListUsernames;
     }
 
     public void RandomMessage() {
